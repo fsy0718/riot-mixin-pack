@@ -78,6 +78,10 @@ define(['exports'], function (exports) { 'use strict';
     init: function init() {
       var _this = this;
 
+      //when the tag hasn't parent
+      if (!this.parent) {
+        return;
+      }
       /** Store the keys originally belonging to the tag */
       this.one('update', function () {
         _this._ownPropKeys = getAllPropertyNames(_this);
@@ -92,12 +96,12 @@ define(['exports'], function (exports) { 'use strict';
         //   In some cases function on the child would be overriden.
         //   This issue needs more study...
         .filter(function (key) {
-          return ! ~_this._ownPropKeys.concat(ignoreProps).indexOf(key);
+          return !~_this._ownPropKeys.concat(ignoreProps).indexOf(key);
         }).forEach(function (key) {
           _this[key] = typeof _this.parent[key] != 'function' || _this.parent[key]._inherited ? _this.parent[key] : hook(_this.parent, key);
         });
         getAllPropertyNames(_this.parent.opts).filter(function (key) {
-          return ! ~_this._ownOptsKeys.indexOf(key) && key != 'riotTag';
+          return !~_this._ownOptsKeys.indexOf(key) && key != 'riotTag';
         }).forEach(function (key) {
           _this.opts[key] = typeof _this.parent.opts[key] != 'function' || _this.parent.opts[key]._inherited ? _this.parent.opts[key] : hook(_this.parent, key);
         });
@@ -144,5 +148,7 @@ define(['exports'], function (exports) { 'use strict';
   exports.syncEvent = syncEvent;
   exports.parentScope = parentScope;
   exports.querySelector = querySelector;
+
+  Object.defineProperty(exports, '__esModule', { value: true });
 
 });

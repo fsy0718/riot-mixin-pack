@@ -23,7 +23,7 @@
     "mixin"
   ],
   "devDependencies": {
-    "babel-preset-es2015-rollup": "^1.1.1",
+    "babel-preset-es2015-rollup": "^1.2.0",
     "change-case": "^2.3.1",
     "chokidar-cli": "^1.2.0",
     "eslint": "^2.5.3",

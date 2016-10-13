@@ -29,6 +29,10 @@ export default {
    * Inject properties from parents
    */
   init: function() {
+    //when the tag hasn't parent
+    if(!this.parent){
+      return
+    }
     /** Store the keys originally belonging to the tag */
     this.one('update', () => {
       this._ownPropKeys = getAllPropertyNames(this)
